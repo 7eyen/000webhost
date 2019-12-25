@@ -1,0 +1,24 @@
+name : 'Hell World'
+
+inputs:
+  ftp-url:  # id of input
+    description: 'ftp地址'
+    required: true
+  user:
+    description: 'ftp账户名'
+    required: true
+  password:
+    description: 'ftp密码'
+    required: true
+  ARGS:
+    description: 'Passes through options into git-ftp'
+    required: false
+    default: ''
+
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
+    
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
