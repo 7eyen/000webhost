@@ -1,0 +1,33 @@
+name: Deploy to ftp
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 2
+      - name: 构建环境
+        env:
+          db_info: ${{ secrets.db_info }}
+          db_pass: ${{ secrets.db_pass }}
+          APP_KEY: ${{ secrets.APP_KEY }}
+        run: |
+          php -r "file_put_contents('./config/database.php', str_replace(['d664283079','d664283077'], [getenv('db_info'),getenv('db_pass')], file_get_contents('./config/database.php')));"
+          php -r "file_put_contents('./config/app.php', str_replace('pre_replace_key', getenv('APP_KEY'), file_get_contents('./config/app.php')));"
+          composer install -q
+      - name: 部署到FTP
+        uses: 7eyen/000webhost@deploy
+        env:
+          FTP_URL: ftp://files.000webhost.com/
+          FTP_USERNAME: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          ARGS: -v
+

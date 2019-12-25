@@ -1,0 +1,6 @@
+public_html/uploads/*
+.gitignore
+.git-ftp-ignore
+.git-ftp-include
+*/.gitignore
+.github/*
