@@ -20,8 +20,6 @@ jobs:
           db_info: ${{ secrets.db_info }}
           db_pass: ${{ secrets.db_pass }}
           APP_KEY: ${{ secrets.APP_KEY }}
-        with:
-          php-versino: 7.2
         run: |
           php -r "file_put_contents('./config/database.php', str_replace(['d664283079','d664283077'], [getenv('db_info'),getenv('db_pass')], file_get_contents('./config/database.php')));"
           php -r "file_put_contents('./config/app.php', str_replace('pre_replace_key', getenv('APP_KEY'), file_get_contents('./config/app.php')));"
