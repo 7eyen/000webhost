@@ -14,9 +14,8 @@ jobs:
       - uses: actions/checkout@master
         with:
           fetch-depth: 2
-      - name: 构建环境
-        with:
           php-version: '7.2'
+      - name: 构建环境
         env:
           db_info: ${{ secrets.db_info }}
           db_pass: ${{ secrets.db_pass }}
