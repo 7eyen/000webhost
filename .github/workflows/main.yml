@@ -23,7 +23,7 @@ jobs:
         run: |
           php -r "file_put_contents('./config/database.php', str_replace(['d664283079','d664283077'], [getenv('db_info'),getenv('db_pass')], file_get_contents('./config/database.php')));"
           php -r "file_put_contents('./config/app.php', str_replace('pre_replace_key', getenv('APP_KEY'), file_get_contents('./config/app.php')));"
-          composer install --no-dev
+          composer install --no-scripts
       - name: 部署到FTP
         uses: 7eyen/000webhost@deploy
         env:
